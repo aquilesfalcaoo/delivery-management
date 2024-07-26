@@ -29,7 +29,7 @@ $ yarn install
 # Rodar o projeto
 $ yarn run start
 
-# Rodar os testes
+# Executar os testes
 $ yarn run test
 
 # Executar o coverage
