@@ -1,0 +1,88 @@
+<p-card header="Andamento de Entregas por Motorista">
+  <p-table [value]="deliveryProgress" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Motorista</th>
+        <th>Entregou</th>
+        <th>Saiu Para Entrega</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-delivery>
+      <tr>
+        <td>{{ delivery.name }}</td>
+        <td>
+          {{
+            delivery.amountDelivered > 1
+              ? delivery.amountDelivered + " Encomendas"
+              : delivery.amountDelivered + " Encomenda"
+          }}
+        </td>
+        <td>
+          {{
+            delivery.amountLeftDelivery > 1
+              ? delivery.amountLeftDelivery + " Encomendas"
+              : delivery.amountLeftDelivery + " Encomenda"
+          }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+<p-card header="Entregas com Insucesso">
+  <p-table
+    [value]="unsuccessfulDeliveries"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Motorista</th>
+        <th>Quantidade Total de Entregas</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-delivery>
+      <tr>
+        <td>{{ delivery.name }}</td>
+        <td>
+          {{
+            delivery.amount > 1
+              ? delivery.amount + " Entregas"
+              : delivery.amount + " Entrega"
+          }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+<p-card header="Andamento de Entregas por Bairro">
+  <p-table
+    [value]="deliveriesByNeighborhood"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Bairro</th>
+        <th>Quantidade de Entregas Realizadas</th>
+        <th>Quantidade Total de Entregas</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-delivery>
+      <tr>
+        <td>{{ delivery.neighborhood }}</td>
+        <td>
+          {{
+            delivery.amountDelivered > 1
+              ? delivery.amountDelivered + " Entregas"
+              : delivery.amountDelivered + " Entrega"
+          }}
+        </td>
+        <td>
+          {{
+            delivery.amountDeliveries > 1
+              ? delivery.amountDeliveries + " Entregas"
+              : delivery.amountDeliveries + " Entrega"
+          }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

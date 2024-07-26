@@ -1,0 +1,47 @@
+<p-card header="Lista de Entregas">
+  <p-table
+    #dt1
+    [value]="deliveries"
+    [paginator]="true"
+    [globalFilterFields]="['motorista.nome', 'status_entrega']"
+    [rows]="10"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    empty
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            [(ngModel)]="searchValue"
+            (input)="onInput($event)"
+            placeholder="Search"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Documento</th>
+        <th>Motorista</th>
+        <th>Status</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-delivery>
+      <tr>
+        <td>{{ delivery.id }}</td>
+        <td>{{ delivery.documento }}</td>
+        <td>{{ delivery.motorista.nome }}</td>
+        <td>{{ delivery.status_entrega }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">No delivery found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
