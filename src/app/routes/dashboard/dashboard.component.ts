@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
   public amountDeliveryProgressByDriver(
     deliveries: Delivery[]
   ): DeliveryProgress[] {
-    const countMap = deliveries.reduce((acc, delivery) => {
+    const deliveryStatsByDriver = deliveries.reduce((acc, delivery) => {
       const driver = delivery.motorista.nome;
 
       if (!acc[driver]) {
@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit {
       return acc;
     }, {} as { [key: string]: { amountDelivered: number; amountLeftDelivery: number } });
 
-    return Object.entries(countMap).map(
+    return Object.entries(deliveryStatsByDriver).map(
       ([name, { amountDelivered, amountLeftDelivery }]) => ({
         name,
         amountDelivered,
@@ -95,40 +95,47 @@ export class DashboardComponent implements OnInit {
   public amountUnsuccessfulDeliveries(
     deliveries: Delivery[]
   ): UnsuccessfulDeliveries[] {
-    const countMap = deliveries
+    const failedDeliveriesCountByDriver = deliveries
       .filter((delivery) => delivery.status_entrega === 'INSUCESSO')
       .reduce((acc, delivery) => {
-        const motoristaNome = delivery.motorista.nome;
-        acc[motoristaNome] = (acc[motoristaNome] || 0) + 1;
+        const driver = delivery.motorista.nome;
+        acc[driver] = (acc[driver] || 0) + 1;
         return acc;
       }, {} as { [key: string]: number });
 
-    return Object.entries(countMap).map(([name, amount]) => ({ name, amount }));
+    return Object.entries(failedDeliveriesCountByDriver).map(
+      ([name, amount]) => ({ name, amount })
+    );
   }
 
   public amountDeliveryByNeighborhood(
     deliveries: Delivery[]
   ): DeliveryByNeighborhood[] {
-    const countMap = deliveries.reduce((acc, delivery) => {
-      const neighborhood = delivery.cliente_destino.bairro;
+    const deliveriesSummaryByNeighborhood = deliveries.reduce(
+      (acc, delivery) => {
+        const neighborhood = delivery.cliente_destino.bairro;
 
-      if (!acc[neighborhood]) {
-        acc[neighborhood] = {
-          amountDeliveries: 0,
-          amountDelivered: 0,
-        };
+        if (!acc[neighborhood]) {
+          acc[neighborhood] = {
+            amountDeliveries: 0,
+            amountDelivered: 0,
+          };
+        }
+
+        if (delivery.status_entrega === 'ENTREGUE') {
+          acc[neighborhood].amountDelivered += 1;
+        } else {
+          acc[neighborhood].amountDeliveries += 1;
+        }
+
+        return acc;
+      },
+      {} as {
+        [key: string]: { amountDeliveries: number; amountDelivered: number };
       }
+    );
 
-      if (delivery.status_entrega === 'ENTREGUE') {
-        acc[neighborhood].amountDelivered += 1;
-      } else {
-        acc[neighborhood].amountDeliveries += 1;
-      }
-
-      return acc;
-    }, {} as { [key: string]: { amountDeliveries: number; amountDelivered: number } });
-
-    return Object.entries(countMap).map(
+    return Object.entries(deliveriesSummaryByNeighborhood).map(
       ([neighborhood, { amountDeliveries, amountDelivered }]) => ({
         neighborhood,
         amountDeliveries,
