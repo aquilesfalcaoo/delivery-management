@@ -7,6 +7,11 @@ export interface Delivery {
   status_entrega: string;
 }
 
+export interface Status {
+  label: string;
+  value: string;
+}
+
 export interface Cliente {
   nome: string;
   endereco: string;

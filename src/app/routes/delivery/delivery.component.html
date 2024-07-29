@@ -6,10 +6,16 @@
     [globalFilterFields]="['motorista.nome', 'status_entrega']"
     [rows]="10"
     [tableStyle]="{ 'min-width': '50rem' }"
-    empty
   >
     <ng-template pTemplate="caption">
       <div class="flex">
+        <p-dropdown
+          [(ngModel)]="selectedStatus"
+          [options]="status"
+          (onChange)="dt1.filter($event.value, 'status_entrega', 'equals')"
+          placeholder="Status"
+        >
+        </p-dropdown>
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
           <input
@@ -40,7 +46,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="6">No delivery found.</td>
+        <td colspan="6">No results found.</td>
       </tr>
     </ng-template>
   </p-table>
