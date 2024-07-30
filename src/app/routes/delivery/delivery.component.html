@@ -3,7 +3,6 @@
     #dt1
     [value]="deliveries"
     [paginator]="true"
-    [globalFilterFields]="['motorista.nome', 'status_entrega']"
     [rows]="10"
     [tableStyle]="{ 'min-width': '50rem' }"
   >
@@ -12,7 +11,7 @@
         <p-dropdown
           [(ngModel)]="selectedStatus"
           [options]="status"
-          (onChange)="dt1.filter($event.value, 'status_entrega', 'equals')"
+          (onChange)="onStatusChanges($event)"
           placeholder="Status"
         >
         </p-dropdown>

@@ -6,6 +6,7 @@ import { Delivery } from '../../core/models/delivery';
 import { DeliveryService } from '../../core/services/delivery/delivery.service';
 import { of } from 'rxjs';
 import { Table } from 'primeng/table';
+import { DropdownChangeEvent } from 'primeng/dropdown';
 
 describe('DeliveryComponent', () => {
   let component: DeliveryComponent;
@@ -15,7 +16,7 @@ describe('DeliveryComponent', () => {
 
   beforeEach(async () => {
     dataTableMock = {
-      filterGlobal: jest.fn(),
+      filter: jest.fn(),
     } as unknown as jest.Mocked<Table>;
     await TestBed.configureTestingModule({
       imports: [DeliveryComponent, HttpClientTestingModule],
@@ -76,9 +77,27 @@ describe('DeliveryComponent', () => {
 
     component.onInput(event);
 
-    expect(component.dt1?.filterGlobal).toHaveBeenCalledWith(
+    expect(component.dt1?.filter).toHaveBeenCalledWith(
       inputValue,
+      'motorista.nome',
       'contains'
+    );
+  });
+
+  it('should call filterGlobal on dropdown event', () => {
+    const value = 'PENDENTE';
+
+    const event: DropdownChangeEvent = {
+      originalEvent: {} as Event,
+      value: value,
+    };
+
+    component.onStatusChanges(event);
+
+    expect(component.dt1?.filter).toHaveBeenCalledWith(
+      value,
+      'status_entrega',
+      'equals'
     );
   });
 });

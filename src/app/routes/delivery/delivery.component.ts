@@ -6,7 +6,7 @@ import { DeliveryService } from '../../core/services/delivery/delivery.service';
 import { Delivery, Status } from '../../core/models/delivery';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
+import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-delivery',
@@ -48,8 +48,17 @@ export class DeliveryComponent implements OnInit {
   onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     const value = target.value;
+
     if (this.dt1) {
-      this.dt1.filterGlobal(value, 'contains');
+      this.dt1.filter(value, 'motorista.nome', 'contains');
+    }
+  }
+
+  onStatusChanges(event: DropdownChangeEvent): void {
+    const value = event.value;
+
+    if (this.dt1) {
+      this.dt1.filter(value, 'status_entrega', 'equals');
     }
   }
 
