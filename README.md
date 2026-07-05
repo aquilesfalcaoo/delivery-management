@@ -1,7 +1,12 @@
-<h2 align="center">Delivery Management</h2>
+# 🚚 Delivery Management
+
+Frontend application developed with Angular and TypeScript for managing deliveries.
+
+This project demonstrates modern frontend engineering practices including reactive programming with RxJS, reusable components, responsive UI, unit testing with Jest and mock REST API integration using JSON Server.
 
 ![screenshot](https://raw.githubusercontent.com/aquilesfalcaoo/delivery-management/main/cover.png)
 
+## 🛠️ Tech Stack
 <p align="center">
   <img src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white" />
   <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
@@ -12,29 +17,78 @@
   <img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" />
 </p>
 
-> [!WARNING]
-> Rode o projeto somente pelo comando yarn run start, pois estou usando a biblioteca json-server pra simular uma API Rest e rodar ao mesmo tempo que a aplicação Angular.
+## ✨ Features
 
-## Instruções
+- Delivery Dashboard
 
-Para rodar esse projeto e clonar essa aplicação, você vai precisar do [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) e [Yarn](https://classic.yarnpkg.com/en/) instalado em sua máquina. A partir de sua linha de comando:
+- Delivery Status Monitoring
+
+- Driver Management
+
+- Mock REST API Integration
+
+- Reactive Programming with RxJS
+
+- Responsive Interface
+
+- Unit Testing with Jest
+
+- Component-Based Architecture
+
+## 🏛️ Architecture
+
+The application was designed following Angular best practices and a component-based architecture.
+
+### 🧱 Concepts Applied
+
+- Component-Based Architecture
+
+- Reactive Programming
+
+- Lazy Loading
+
+- Standalone Components
+
+- Dependency Injection
+
+- REST API Consumption
+
+- Unit Testing
+
+## ⚠️ Important
+
+This project uses JSON Server to simulate a REST API.
+
+Running
+
+yarn start
+
+will automatically start both:
+
+• Angular application
+
+• JSON Server
+
+## 🚀 Installation
+
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) e [Yarn](https://classic.yarnpkg.com/en/) installed on your computer. From your command line:
 
 ```bash
-# Clonar o repositório
+# Clone this repository
 $ git clone https://github.com/aquilesfalcaoo/delivery-management
 
-# Instalar as dependências
+# Install dependencies
 $ yarn install
 
-# Rodar o projeto
+# Run the app
 $ yarn run start
 
-# Executar os testes
+# Run the tests
 $ yarn run test
 
-# Executar o coverage
+# Run the coverage
 $ yarn run test:coverage
 
-# Abrir o projeto
+# Open the application
 $ http://localhost:4200/
 ```
